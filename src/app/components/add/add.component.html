@@ -1,0 +1,64 @@
+<div *ngIf="succes" class="alert alert-success" role="alert">
+    Activity was added successfully!
+  </div>
+
+  <div *ngIf="fail" class="alert alert-danger" role="alert">
+    the activity was not added successfully!
+  </div>
+
+<h4 class="title">ADD ACTIVITY TO SCHEDULE</h4>
+<hr>
+<form (ngSubmit)="save(forma)" #forma="ngForm">
+  <div>
+    <div class="form-group row"
+      [ngClass]="{'has-danger':(description.errors?.minlength||description.errors?.required)&&description.touched}">
+      <h4>Description</h4>
+      <div class="col-8">
+        <input class="form-control temp" type="text" 
+               placeholder="description" 
+               name="description" 
+               [(ngModel)]="activity.description"
+               required minlength="5" 
+               #description="ngModel">
+        <div *ngIf="description.errors?.required" 
+              class="alert alert-danger form-control-feedback atention" 
+              role="alert">
+          <h4 class="alert-heading">Attention!</h4>
+           The field cannot be empty
+        </div>
+        <div *ngIf="description.errors?.minlength" 
+              class="alert alert-danger form-control-feedback" 
+              role="alert">
+          <h4 class="alert-heading ">Atencion!</h4>
+          You need at least {{description.errors.minlength.requiredLength}} characters
+        </div>
+        <div *ngIf="description.valid" class="container main-container alert alert-info temp" role="alert">
+          <h4>Well done!</h4>
+        </div>
+        <div class="form-check">
+            <input type="checkbox"              
+               placeholder="is_active" 
+               name="is_active" 
+               [(ngModel)]="activity.is_active"
+               required minlength="5" 
+               #is_active="ngModel"
+            class="form-check-input" 
+            id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Active/No active</label>
+          </div>
+      </div>
+    </div>    
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button [disabled]="!forma.valid" type="submit" class="btn btn-outline-primary">
+        Save
+      </button>
+    </div>
+  </div>
+  <pre>
+{{activity|json}}
+  </pre>
+
+</form>

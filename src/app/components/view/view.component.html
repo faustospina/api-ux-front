@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">description</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">activo</th>
+          <th scope="col">edit</th>
+          <th scope="col">delete</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let activity of activities let i = index">        
+        <tr class="table-success text-dark">
+          <td>{{activity.id}}</td>
+          <td>{{activity.description}}</td>
+          <td>{{activity.creation_date|date:'medium'}}</td>
+          <td>{{activity.is_active}}</td>   
+          <td><button (click)="editActivity(activity.id)" class="btn btn-primary">editar</button></td> 
+          <td><button (click)="deleteActivity(activity.id)" class="btn btn-danger">delete</button></td>
+        </tr>       
+      </tbody>
+    </table>
+  </div>
